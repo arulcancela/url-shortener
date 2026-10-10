@@ -72,6 +72,9 @@ jobs:
 
       - name: Run E2E tests
         run: npx playwright test
+        env:
+          # Los E2E crean varios enlaces seguidos desde la misma IP.
+          RATE_LIMIT_DISABLED: 'true'
 
       - name: Upload Playwright report
         if: ${{ !cancelled() }}

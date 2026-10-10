@@ -9,6 +9,11 @@
  *    `UPSTASH_REDIS_REST_TOKEN`), se usa Redis (atómico y compartido).
  *  - Si no, se degrada a un limitador en memoria (válido para dev / single
  *    instance / tests).
+ *
+ * Configuración por entorno:
+ *  - RATE_LIMIT_MAX         peticiones permitidas por ventana (def. 10)
+ *  - RATE_LIMIT_WINDOW_MS   tamaño de la ventana en ms (def. 60000)
+ *  - RATE_LIMIT_DISABLED    si es "true", desactiva el límite (útil en E2E)
  */
 
 export interface RateLimitResult {
@@ -16,11 +21,17 @@ export interface RateLimitResult {
   remaining: number;
   reset: number;
   /** Backend efectivamente usado (útil para debug y observabilidad). */
-  backend: 'redis' | 'memory';
+  backend: 'redis' | 'memory' | 'disabled';
 }
 
-const WINDOW_MS = 60_000; // 1 minuto
-const MAX_REQUESTS = 10; // 10 creaciones por minuto y por IP
+function readInt(value: string | undefined, fallback: number): number {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+const WINDOW_MS = readInt(process.env.RATE_LIMIT_WINDOW_MS, 60_000);
+const MAX_REQUESTS = readInt(process.env.RATE_LIMIT_MAX, 10);
+const DISABLED = process.env.RATE_LIMIT_DISABLED === 'true';
 
 // ---------------------------------------------------------------------------
 // Backend en memoria
@@ -32,18 +43,14 @@ interface Bucket {
 
 const buckets = new Map<string, Bucket>();
 
-function prune(bucket: Bucket, now: number): void {
-  bucket.timestamps = bucket.timestamps.filter((t) => now - t < WINDOW_MS);
+function prune(bucket: Bucket, now: number, windowMs: number): void {
+  bucket.timestamps = bucket.timestamps.filter((t) => now - t < windowMs);
 }
 
-function checkMemory(
-  key: string,
-  max: number,
-  windowMs: number,
-): RateLimitResult {
+function checkMemory(key: string, max: number, windowMs: number): RateLimitResult {
   const now = Date.now();
   const bucket = buckets.get(key) ?? { timestamps: [] };
-  prune(bucket, now);
+  prune(bucket, now, windowMs);
 
   if (bucket.timestamps.length >= max) {
     const oldest = bucket.timestamps[0] ?? now;
@@ -131,6 +138,10 @@ export async function checkRateLimit(
   max: number = MAX_REQUESTS,
   windowMs: number = WINDOW_MS,
 ): Promise<RateLimitResult> {
+  if (DISABLED) {
+    return { success: true, remaining: Number.MAX_SAFE_INTEGER, reset: Date.now(), backend: 'disabled' };
+  }
+
   const key = ip || 'unknown';
   const redis = await getRedis();
 
