@@ -24,12 +24,12 @@ Desplegable en la **capa gratuita** de Vercel + Neon/Supabase.
 
 > Sustituye estos placeholders por capturas reales de tu deploy (recomendado: un GIF del flujo completo).
 
-| Home — crear enlace | Dashboard con analíticas |
-| :---: | :---: |
+|         Home — crear enlace         |           Dashboard con analíticas            |
+| :---------------------------------: | :-------------------------------------------: |
 | ![Home](./docs/screenshot-home.png) | ![Dashboard](./docs/screenshot-dashboard.png) |
 
-| Detalle del enlace (gráficas + QR) | Flujo completo (GIF) |
-| :---: | :---: |
+|    Detalle del enlace (gráficas + QR)    |   Flujo completo (GIF)   |
+| :--------------------------------------: | :----------------------: |
 | ![Detalle](./docs/screenshot-detail.png) | ![Demo](./docs/demo.gif) |
 
 ---
@@ -44,7 +44,7 @@ Desplegable en la **capa gratuita** de Vercel + Neon/Supabase.
 - 📈 **Página de detalle** con gráfica de clics por día (Recharts), desglose por país/referrer y tabla de últimos accesos.
 - 📱 **Códigos QR** generados en el cliente y descargables en PNG.
 - ⏳ **Expiración opcional** de enlaces.
-- 🚦 **Rate limiting por IP** con **Upstash Redis** (compartido entre instancias serverless) y *fallback* a memoria.
+- 🚦 **Rate limiting por IP** con **Upstash Redis** (compartido entre instancias serverless) y _fallback_ a memoria.
 - 🌗 **Modo claro/oscuro** persistente.
 - 🧪 **41 tests unitarios** (Vitest) + **E2E** (Playwright) cubriendo el flujo completo.
 - ⚙️ **CI/CD** con GitHub Actions: lint + typecheck + tests + build + E2E.
@@ -54,21 +54,21 @@ Desplegable en la **capa gratuita** de Vercel + Neon/Supabase.
 
 ## 🧱 Stack
 
-| Capa         | Tecnología                                     |
-| ------------ | ---------------------------------------------- |
-| Framework    | Next.js 14+ (App Router) + React 18            |
-| Lenguaje     | TypeScript strict (sin `any`)                  |
-| UI           | Tailwind CSS + shadcn/ui + lucide-react        |
-| Auth         | NextAuth (GitHub OAuth) + Prisma Adapter       |
-| ORM / DB     | Prisma · SQLite (dev) · Postgres (prod)        |
-| Slugs        | nanoid                                         |
-| QR           | qrcode                                         |
-| Gráficas     | Recharts                                       |
-| Validación   | zod (API) + validadores propios (dominio)      |
-| Rate limit   | Upstash Redis (opcional) / memoria (fallback)  |
-| Tests        | Vitest (unit) + Playwright (E2E)               |
-| CI           | GitHub Actions                                 |
-| Deploy       | Vercel (+ Neon/Supabase para Postgres gratis)  |
+| Capa       | Tecnología                                    |
+| ---------- | --------------------------------------------- |
+| Framework  | Next.js 14+ (App Router) + React 18           |
+| Lenguaje   | TypeScript strict (sin `any`)                 |
+| UI         | Tailwind CSS + shadcn/ui + lucide-react       |
+| Auth       | NextAuth (GitHub OAuth) + Prisma Adapter      |
+| ORM / DB   | Prisma · SQLite (dev) · Postgres (prod)       |
+| Slugs      | nanoid                                        |
+| QR         | qrcode                                        |
+| Gráficas   | Recharts                                      |
+| Validación | zod (API) + validadores propios (dominio)     |
+| Rate limit | Upstash Redis (opcional) / memoria (fallback) |
+| Tests      | Vitest (unit) + Playwright (E2E)              |
+| CI         | GitHub Actions                                |
+| Deploy     | Vercel (+ Neon/Supabase para Postgres gratis) |
 
 ---
 
@@ -125,18 +125,18 @@ url-shortener/
 
 Documentadas por transparencia, priorizando lo más simple que siga siendo profesional.
 
-1. **SQLite por defecto, Postgres en producción.** Garantiza `npm run dev` sin configuración. Un único schema; cambiar de motor es una línea (ver *Cambiar a Postgres*).
+1. **SQLite por defecto, Postgres en producción.** Garantiza `npm run dev` sin configuración. Un único schema; cambiar de motor es una línea (ver _Cambiar a Postgres_).
 2. **API REST vía Route Handlers** en lugar de Server Actions: testeable con Playwright y consumible desde cualquier cliente.
 3. **Alfabeto base62 sin caracteres ambiguos** (sin `0/O`, `1/l/I`), longitud 7 → ~1,7·10¹² combinaciones y enlaces legibles a mano.
 4. **Validación de URL propia** además de zod: bloquea `javascript:`, `data:`, `file:`, `vbscript:`, `blob:`… y hosts locales/privados (anti-SSRF).
 5. **Auth con sesión JWT + PrismaAdapter.** El `userId` se propaga en la sesión; los enlaces anónimos (`userId = null`) siguen permitidos.
 6. **Ownership como 404, no 403**: no revelamos si un recurso ajeno existe.
-7. **Rate limit con Upstash Redis** (atómico y compartido) y *fallback* a memoria si no hay credenciales o Redis falla. No bloquea la creación si el backend cae.
+7. **Rate limit con Upstash Redis** (atómico y compartido) y _fallback_ a memoria si no hay credenciales o Redis falla. No bloquea la creación si el backend cae.
 8. **Clic registrado "best effort"**: si falla el `INSERT`, la redirección no se bloquea (prioridad: llegar al destino).
 9. **País desde `x-vercel-ip-country`**: sin APIs de geo-IP de pago; en local será `null`.
 10. **QR en cliente**: menos carga de servidor, sin almacenamiento, descarga directa.
 11. **`force-dynamic` en el layout**: la app depende de la sesión, así que no se prerenderiza estáticamente.
-12. **`next-auth` NO en `serverComponentsExternalPackages`**: externalizarlo rompe el runtime de React en el SSR (*Invalid hook call*). Documentado porque fue un bug real encontrado durante el desarrollo.
+12. **`next-auth` NO en `serverComponentsExternalPackages`**: externalizarlo rompe el runtime de React en el SSR (_Invalid hook call_). Documentado porque fue un bug real encontrado durante el desarrollo.
 
 ---
 
@@ -213,45 +213,30 @@ npm run format:check  # Prettier (comprueba)
 
 ## ☁️ Despliegue
 
-### Vercel + Postgres (Neon o Supabase) — recomendado
+Todo el proceso está detallado **paso a paso** en **[DEPLOY.md](./DEPLOY.md)** (Neon + Vercel + GitHub OAuth, todo en capa gratuita).
 
-1. **Crea la base de datos Postgres** en [Neon](https://neon.tech) o [Supabase](https://supabase.com) (plan gratuito) y copia la connection string.
-2. **Cambia el provider de Prisma** (sección siguiente).
-3. **Sube el repo a GitHub** e **impórtalo en Vercel** (o usa el botón de arriba).
-4. **Variables de entorno en Vercel:**
-   - `DATABASE_URL` → connection string de Postgres.
-   - `NEXT_PUBLIC_APP_URL` → `https://tu-app.vercel.app`.
-   - `NEXTAUTH_SECRET` → genera uno con `openssl rand -base64 32`.
-   - `NEXTAUTH_URL` → `https://tu-app.vercel.app`.
-   - `GITHUB_ID` / `GITHUB_SECRET` → tu OAuth App (callback: `https://tu-app.vercel.app/api/auth/callback/github`).
-   - *(Opcional)* `UPSTASH_REDIS_REST_URL` y `UPSTASH_REDIS_REST_TOKEN`.
-5. Deploy. El `buildCommand` de `vercel.json` ejecuta `prisma generate && prisma db push && next build`.
+Resumen:
 
-### Cambiar a Postgres
+1. **Base de datos:** crea un Postgres gratis en [Neon](https://neon.tech).
+2. **Cambia el provider de Prisma:** `npm run deploy:postgres`.
+3. **Deploy en Vercel:** importa el repo y define las variables de `[.env.production.example](./.env.production.example)`.
+4. **GitHub OAuth:** crea una OAuth App y añade `GITHUB_ID` / `GITHUB_SECRET`.
+5. **(Opcional)** Upstash Redis para rate limiting compartido.
 
-Edita `prisma/schema.prisma`:
-
-```prisma
-datasource db {
-  provider = "postgresql"   // cambiar desde "sqlite"
-  url      = env("DATABASE_URL")
-}
-```
-
-Actualiza `DATABASE_URL` y listo. No hay que tocar más código: la capa de datos está encapsulada en `src/lib/prisma.ts`.
+> Para volver a SQLite en local: `npm run deploy:sqlite`.
 
 ---
 
 ## 🔌 API
 
-| Método   | Ruta                     | Auth    | Descripción                                     |
-| -------- | ------------------------ | ------- | ----------------------------------------------- |
-| `POST`   | `/api/links`             | opcional | Crea un enlace (rate limit por IP).            |
-| `GET`    | `/api/links`             | opcional | Lista los enlaces del usuario (o anónimos).    |
-| `GET`    | `/api/links/:id`         | —       | Detalle de un enlace propio + últimos clics.   |
-| `DELETE` | `/api/links/:id`         | —       | Elimina un enlace propio (clics en cascada).   |
-| `GET`    | `/api/links/:id/clicks`  | —       | Serie diaria de clics (`?days=30`).            |
-| `GET`    | `/:slug`                 | —       | Redirige y registra el clic.                   |
+| Método   | Ruta                    | Auth     | Descripción                                  |
+| -------- | ----------------------- | -------- | -------------------------------------------- |
+| `POST`   | `/api/links`            | opcional | Crea un enlace (rate limit por IP).          |
+| `GET`    | `/api/links`            | opcional | Lista los enlaces del usuario (o anónimos).  |
+| `GET`    | `/api/links/:id`        | —        | Detalle de un enlace propio + últimos clics. |
+| `DELETE` | `/api/links/:id`        | —        | Elimina un enlace propio (clics en cascada). |
+| `GET`    | `/api/links/:id/clicks` | —        | Serie diaria de clics (`?days=30`).          |
+| `GET`    | `/:slug`                | —        | Redirige y registra el clic.                 |
 
 ```bash
 curl -X POST http://localhost:3000/api/links \
