@@ -14,7 +14,7 @@ Desplegable en la **capa gratuita** de Vercel + Neon/Supabase.
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue?logo=typescript)](https://www.typescriptlang.org)
 [![Tests](https://img.shields.io/badge/tests-Vitest%20%2B%20Playwright-green)](#-tests)
 
-**[🚀 Ver demo en vivo](https://TU-DEMO.vercel.app)** · **[📸 Capturas](#-capturas)**
+**[🚀 Ver demo en vivo](https://url-shortener-s35d.vercel.app)** · **[📸 Capturas](#-capturas)**
 
 </div>
 
