@@ -58,4 +58,4 @@ Ejemplo: `feat(slug): permitir slugs personalizados de hasta 32 caracteres`
 
 ## ¿Dudas?
 
-Abre un [issue](https://github.com/TU-USUARIO/url-shortener/issues) describiendo tu pregunta o idea.
+Abre un [issue](https://github.com/arulcancela/url-shortener/issues) describiendo tu pregunta o idea.

@@ -7,8 +7,8 @@
 Construido con Next.js 14 (App Router), TypeScript estricto, Prisma y Tailwind CSS.
 Desplegable en la **capa gratuita** de Vercel + Neon/Supabase.
 
-[![CI](https://github.com/TU-USUARIO/url-shortener/actions/workflows/ci.yml/badge.svg)](https://github.com/TU-USUARIO/url-shortener/actions/workflows/ci.yml)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/TU-USUARIO/url-shortener)
+[![CI](https://github.com/arulcancela/url-shortener/actions/workflows/ci.yml/badge.svg)](https://github.com/arulcancela/url-shortener/actions/workflows/ci.yml)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/arulcancela/url-shortener)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue?logo=typescript)](https://www.typescriptlang.org)
@@ -146,7 +146,7 @@ Requisitos: **Node ≥ 20** y npm.
 
 ```bash
 # 1. Clonar
-git clone https://github.com/TU-USUARIO/url-shortener.git
+git clone https://github.com/arulcancela/url-shortener.git
 cd url-shortener
 
 # 2. Instalar (también ejecuta `prisma generate`)
