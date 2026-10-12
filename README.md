@@ -28,9 +28,9 @@ Capturas de la **[demo en vivo](https://url-shortener-s35d.vercel.app)**:
 | :---------------------------------: | :-------------------------------------------: |
 | ![Home](./docs/screenshot-home.png) | ![Dashboard](./docs/screenshot-dashboard.png) |
 
-|    Detalle del enlace (gráficas + QR)    |           Acceso con GitHub           |
-| :--------------------------------------: | :-----------------------------------: |
-| ![Detalle](./docs/screenshot-detail.png) | ![Login](./docs/screenshot-login.png) |
+|           Acceso con GitHub           |
+| :-----------------------------------: |
+| ![Login](./docs/screenshot-login.png) |
 
 ---
 
