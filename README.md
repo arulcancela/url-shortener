@@ -22,15 +22,15 @@ Desplegable en la **capa gratuita** de Vercel + Neon/Supabase.
 
 ## 📸 Capturas
 
-> Sustituye estos placeholders por capturas reales de tu deploy (recomendado: un GIF del flujo completo).
+Capturas de la **[demo en vivo](https://url-shortener-s35d.vercel.app)**:
 
 |         Home — crear enlace         |           Dashboard con analíticas            |
 | :---------------------------------: | :-------------------------------------------: |
 | ![Home](./docs/screenshot-home.png) | ![Dashboard](./docs/screenshot-dashboard.png) |
 
-|    Detalle del enlace (gráficas + QR)    |   Flujo completo (GIF)   |
-| :--------------------------------------: | :----------------------: |
-| ![Detalle](./docs/screenshot-detail.png) | ![Demo](./docs/demo.gif) |
+|    Detalle del enlace (gráficas + QR)    |           Acceso con GitHub           |
+| :--------------------------------------: | :-----------------------------------: |
+| ![Detalle](./docs/screenshot-detail.png) | ![Login](./docs/screenshot-login.png) |
 
 ---
 
